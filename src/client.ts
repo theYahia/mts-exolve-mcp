@@ -1,6 +1,10 @@
-const BASE_URL = "https://api.exolve.ru/v1";
+const BASE_URL = process.env.MTS_EXOLVE_BASE_URL || "https://api.exolve.ru";
 const TIMEOUT = 10_000;
 const MAX_RETRIES = 3;
+
+export function getBaseUrl(): string {
+  return BASE_URL;
+}
 
 export async function exolvePost(path: string, body: Record<string, unknown> = {}): Promise<unknown> {
   const token = process.env.MTS_EXOLVE_TOKEN;
@@ -33,7 +37,8 @@ export async function exolvePost(path: string, body: Record<string, unknown> = {
         continue;
       }
 
-      throw new Error(`MTS Exolve HTTP ${response.status}: ${response.statusText}`);
+      const errorBody = await response.text().catch(() => "");
+      throw new Error(`MTS Exolve HTTP ${response.status}: ${response.statusText}${errorBody ? ` — ${errorBody}` : ""}`);
     } catch (error) {
       clearTimeout(timer);
       if (error instanceof DOMException && error.name === "AbortError" && attempt < MAX_RETRIES) {

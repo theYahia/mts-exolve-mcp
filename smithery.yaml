@@ -1,0 +1,18 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - MTS_EXOLVE_TOKEN
+    properties:
+      MTS_EXOLVE_TOKEN:
+        type: string
+        title: MTS Exolve API Token
+        description: Bearer-токен из личного кабинета MTS Exolve (exolve.ru)
+  commandFunction:
+    |-
+    (config) => ({
+      command: "npx",
+      args: ["-y", "@theyahia/mts-exolve-mcp"],
+      env: { MTS_EXOLVE_TOKEN: config.MTS_EXOLVE_TOKEN }
+    })
