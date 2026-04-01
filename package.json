@@ -1,7 +1,7 @@
 {
   "name": "@theyahia/mts-exolve-mcp",
-  "version": "3.0.0",
-  "description": "MCP server for MTS Exolve API — SMS, calls, call recordings, phone numbers, Viber. 8 tools.",
+  "version": "3.0.1",
+  "description": "MCP server for MTS Exolve — SMS, calls, recordings, Viber messaging (Russia)",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -47,7 +47,11 @@
     "sms",
     "telephony",
     "viber",
-    "voice"
+    "voice",
+    "mts-exolve",
+    "api",
+    "typescript",
+    "cpaas"
   ],
   "license": "MIT",
   "repository": {
