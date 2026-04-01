@@ -2,9 +2,22 @@ const BASE_URL = "https://api.exolve.ru/v1";
 const TIMEOUT = 10_000;
 const MAX_RETRIES = 3;
 
-export async function exolvePost(path: string, body: Record<string, unknown> = {}): Promise<unknown> {
+function getToken(): string {
   const token = process.env.MTS_EXOLVE_TOKEN;
   if (!token) throw new Error("MTS_EXOLVE_TOKEN не задан");
+  return token;
+}
+
+export async function exolvePost(path: string, body: Record<string, unknown> = {}): Promise<unknown> {
+  return exolveRequest("POST", path, body);
+}
+
+export async function exolveGet(path: string): Promise<unknown> {
+  return exolveRequest("GET", path);
+}
+
+async function exolveRequest(method: string, path: string, body?: Record<string, unknown>): Promise<unknown> {
+  const token = getToken();
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     const controller = new AbortController();
@@ -12,12 +25,12 @@ export async function exolvePost(path: string, body: Record<string, unknown> = {
 
     try {
       const response = await fetch(`${BASE_URL}/${path}`, {
-        method: "POST",
+        method,
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(body),
+        body: body ? JSON.stringify(body) : undefined,
         signal: controller.signal,
       });
       clearTimeout(timer);
@@ -33,7 +46,8 @@ export async function exolvePost(path: string, body: Record<string, unknown> = {
         continue;
       }
 
-      throw new Error(`MTS Exolve HTTP ${response.status}: ${response.statusText}`);
+      const text = await response.text().catch(() => "");
+      throw new Error(`MTS Exolve HTTP ${response.status}: ${text || response.statusText}`);
     } catch (error) {
       clearTimeout(timer);
       if (error instanceof DOMException && error.name === "AbortError" && attempt < MAX_RETRIES) {

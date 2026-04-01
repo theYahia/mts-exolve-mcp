@@ -26,16 +26,3 @@ export async function handleGetSmsStatus(params: z.infer<typeof getSmsStatusSche
   });
   return JSON.stringify(result, null, 2);
 }
-
-export const makeCallSchema = z.object({
-  from: z.string().describe("Номер звонящего"),
-  to: z.string().describe("Номер вызываемого абонента"),
-});
-
-export async function handleMakeCall(params: z.infer<typeof makeCallSchema>): Promise<string> {
-  const result = await exolvePost("call/make", {
-    from: params.from,
-    to: params.to,
-  });
-  return JSON.stringify(result, null, 2);
-}
