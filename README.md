@@ -1,3 +1,17 @@
+> ## 🗄 Репозиторий заархивирован
+>
+> Разработка переехала в **[theYahia/WWmcp](https://github.com/theYahia/WWmcp)** — монорепозиторий MCP-серверов для незападных API: СНГ, MENA, Африка, LATAM, Юго-Восточная Азия. Общее ядро `@theyahia/mcp-core`, единый CI, единый релизный конвейер.
+>
+> Актуальная версия того, что лежало здесь: [`servers/mts-exolve/`](https://github.com/theYahia/WWmcp/tree/main/servers/mts-exolve)
+>
+> Пакет в npm прежний — [`@theyahia/mts-exolve-mcp`](https://www.npmjs.com/package/@theyahia/mts-exolve-mcp), ставится и работает как раньше.
+> Здесь больше ничего не обновляется. Задачи и pull request'ы — в WWmcp.
+>
+> **Archived — development moved to [theYahia/WWmcp](https://github.com/theYahia/WWmcp),** a monorepo of MCP servers for non-Western APIs.
+> The current version of this package now lives at [`servers/mts-exolve/`](https://github.com/theYahia/WWmcp/tree/main/servers/mts-exolve).
+> The npm package [`@theyahia/mts-exolve-mcp`](https://www.npmjs.com/package/@theyahia/mts-exolve-mcp) is unchanged.
+> Please open issues and pull requests there.
+
 # @theyahia/mts-exolve-mcp
 
 MCP-сервер для MTS Exolve API -- SMS, звонки, записи звонков, номера, Viber. **8 инструментов.**
