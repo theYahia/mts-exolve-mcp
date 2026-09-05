@@ -66,3 +66,7 @@ claude mcp add mts-exolve -e MTS_EXOLVE_TOKEN=your-token -- npx -y @theyahia/mts
 ## Лицензия
 
 MIT
+
+---
+
+Telegram: [@vhodvai](https://t.me/vhodvai)
